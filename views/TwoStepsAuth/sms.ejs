@@ -1,0 +1,51 @@
+<% include ../partials/header_auth %>
+<% include ../partials/errorMsg %>
+
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col-sm-7 col-md-6 col-lg-5">
+        <div class="card shadow border-0">
+          <div class="card-body">
+            <div class="p-2 text-center">
+                <h2>2-Step Verification (SMS)</h2>
+                <h6>Please enter the one time password <br> to verify your account</h6>
+                <img style="margin-bottom: 20px; padding: 80px;" src="https://img.icons8.com/wired/200/FA5252/sms.png"/>
+                <div> <span>A code has been sent to</span> <small><%=phone%></small> </div>
+                
+                
+               
+                <form action="/sms" method="post">
+                  <input type="hidden" name="phone" value=<%=phone%>>
+                    <input type="hidden" name="username" value=<%=username%>>
+                    <input type="hidden" name="otp1" value=<%=OTP%>>
+                    <div id="otp" class="inputs d-flex flex-row justify-content-center mt-2"> <input name="O1" class="m-2 text-center form-control rounded" type="text" id="first" maxlength="1" /> <input name="O2" class="m-2 text-center form-control rounded" type="text" id="second" maxlength="1" /> <input name="O3" class="m-2 text-center form-control rounded" type="text" id="third" maxlength="1" /> <input name="O4" class="m-2 text-center form-control rounded" type="text" id="fourth" maxlength="1" /> <input name="O5" class="m-2 text-center form-control rounded" type="text" id="fifth" maxlength="1" /> <input name="O6" class="m-2 text-center form-control rounded" type="text" id="sixth" maxlength="1" /> </div>
+                    <div class="mt-3"> <button type="submit" class = "btn-lg btn-danger  btn-block">Validate</button> </div>
+    
+    
+                </form>
+               
+                
+            </div>
+            <div class="card-2">
+                <div class="content d-flex justify-content-center align-items-center"> <span>Didn't get the code </span> <a href="#" class="text-decoration-none ms-3"> Resend</a> </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col"> </div>
+    </div>
+  </div>
+
+ 
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+
+function OTPInput() {
+const inputs = document.querySelectorAll('#otp > *[id]');
+for (let i = 0; i < inputs.length; i++) { inputs[i].addEventListener('keydown', function(event) { if (event.key==="Backspace" ) { inputs[i].value='' ; if (i !==0) inputs[i - 1].focus(); } else { if (i===inputs.length - 1 && inputs[i].value !=='' ) { return true; } else if (event.keyCode> 47 && event.keyCode < 58) { inputs[i].value=event.key; if (i !==inputs.length - 1) inputs[i + 1].focus(); event.preventDefault(); } else if (event.keyCode> 64 && event.keyCode < 91) { inputs[i].value=String.fromCharCode(event.keyCode); if (i !==inputs.length - 1) inputs[i + 1].focus(); event.preventDefault(); } } }); } } OTPInput(); });
+</script>
+
+<% include ../partials/footer %>
